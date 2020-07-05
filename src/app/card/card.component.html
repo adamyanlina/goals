@@ -1,4 +1,4 @@
-<div class="form"  [ngClass]="{none: show.isCard === true}">
+<div class="form" *ngIf="!showCard">
   <div class="row">
     <div class="col-55">
       <input type="text" id="name" #name name="name" placeholder="Your name..">
@@ -10,18 +10,17 @@
     </div>
   </div>
   <div class="row">
-    <input type="submit" value="Save" (click)="inputHandler(name.value, goal.value); show.isCard = true">
+    <input type="submit" value="Save" (click)="personGoal(name.value, goal.value)">
   </div>
 </div>
 
-<div class="card" [ngClass]="{block: show.isCard === true}">
-
+<div class="card" *ngIf="showCard">
   <p><img src="./assets/piggy-bank.png"/> until 3 July</p>
-  <h3>Name: {{ name.value }}</h3>
+  <h3>Name: {{name}}</h3>
   <div class="info">
     <div class="circle">
       <ul>
-        <li>$ {{ goal.value }}</li>
+        <li>$ {{goal}}</li>
         <li class="static">of $ {{fullGoal}}</li>
       </ul>
       <div style="display: inline">
@@ -40,7 +39,7 @@
     </div>
   </div>
   <div class="add">
-    <button class="btn-add" (click)="addPercent()">Add</button>
+    <button class="btn-add" (click)="addPercent(percent)">Add</button>
   </div>
 </div>
 
